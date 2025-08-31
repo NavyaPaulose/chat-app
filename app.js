@@ -5,7 +5,12 @@ const PORT= process.env.PORT || 4000
 const server =app.listen(PORT,() =>console.log(`chat server on port ${PORT}`))
 
 
-const io=require('socket.io')(server)
+const io = require('socket.io')(server, {
+    cors: {
+        origin: '*',  // or specify your client domains here
+        methods: ['GET', 'POST']
+    }
+});
 app.use(express.static(path.join(__dirname,'public')))
 
 let socketConnected= new Set()
